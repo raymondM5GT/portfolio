@@ -1,0 +1,114 @@
+{% extends 'Base/main.html' %}
+
+{% load static %}
+
+{% block content %}
+     
+   
+
+    <section class="hero">
+
+        <div class="hero_content">
+            <div class="content--intro">
+                <img id="profile_pic" src="{% static 'images/asta.jpg' %}">
+                <h1 class="name">Rohit <br> Purty</h1>
+            </div>    
+            
+            <div class="content--subsection">
+                <h3 class="heading">Python Developer & Data Analyst</h3>
+                <p class="desc">I am a Fresher and a Learner. I like to Learn new things and experiment on them.</p>
+            </div>    
+        </div>
+           
+    </section>
+
+    <section class="container section--2">
+         
+        <h4>My Projects</h4>
+        <h5>Projects that made my journey worthwhile.</h5>
+        
+        <div class="projects--wrapper">
+            
+            {% for project in projects %}
+
+            <div class="project--column">
+                <a href="{% url 'project' project.id %}">
+                    <img class="project--thumbnail" src="{{project.thumbnail.url}}">
+                </a>
+                <div class="project--body">
+                    <h5>{{ project.title }}</h5>
+
+                </div>
+            </div>
+            
+            {% empty %}
+                 <h4>There are no projects in the database... </h4>
+            {% endfor %}
+            
+        </div>
+
+        <div class="about--wrapper">
+            <h3>More About Me</h3>
+
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            
+            <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>         
+            
+
+        </div>
+    </section>
+
+    <section class="section--1">
+     
+        <div class="skills--container">
+            <h3>Skills</h3>
+
+            {% for skill in detailedskills %}
+            <div class="skill--wrapper">
+                <h5>{{skill.title}}</h5>
+
+                <p>{{skill.body}}.</p>
+
+            </div>
+            {% endfor %} 
+
+            <h4>Other skills</h4>
+
+    
+            <div class="other--skills--wrapper">
+
+                {% for skill in skills %}
+                <div class="skill--tag">
+                    <span>{{skill.title}}</span>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>    
+
+    </section>
+
+    <section class="section--2">
+        <div class="container">
+            <form class="contact--form" method="POST">
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">{{field.label}}</label>
+                    {{field}}
+                     
+                </div>
+
+                {% endfor %}
+           
+                <input class="btn btn-primary" type="submit" value="submit">
+            </form>
+        </div>
+    </section>
+{% endblock %}

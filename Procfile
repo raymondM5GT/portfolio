@@ -1,3 +1,2 @@
-web: gunicorn portfoliosite.wsgi:Base --log-file -
-python manage.py collectstatic --noinput
-manage.py migrate
+web: gunicorn Portfoliosite.wsgi --log-file -
+
